@@ -6,8 +6,8 @@ galaxy_info:
     min_ansible_version: 1.9
     platforms:
         - name: "Debian"
-        versions:
-        - all
+          versions:
+            - all
     galaxy_tags:
         - debian
         - symfony
