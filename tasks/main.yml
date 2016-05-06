@@ -11,6 +11,6 @@
 - shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin creates=/usr/local/bin/composer
 - shell: mv /usr/local/bin/composer.phar /usr/local/bin/composer creates=/usr/local/bin/composer
 - file: path=/usr/local/bin/composer mode=a+x state=file
-- shell: rm -rf {{ nginx_root_dir }}/.??*
+- file: path={{ nginx_root_dir }}/* state=absent
 - shell: composer -n create-project symfony/framework-standard-edition {{ nginx_root_dir }}
 - copy: src=.gitignore dest={{ nginx_root_dir }}
