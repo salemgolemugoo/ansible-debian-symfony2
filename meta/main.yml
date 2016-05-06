@@ -1,0 +1,14 @@
+galaxy_info:
+    author: salemgolemugoo
+    description: "Installs Symfony2 blank application and it's dependecies"
+    company: "Fleepix LLC"
+    license: "BSD"
+    min_ansible_version: 1.9
+    platforms:
+        - name: "Debian"
+        versions:
+        - all
+    galaxy_tags:
+        - debian
+        - symfony
+        - php

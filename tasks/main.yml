@@ -1,0 +1,16 @@
+- npm: name=less global=yes state=present
+- npm: name=uglify-js global=yes state=present
+- npm: name=bower global=yes state=present
+- npm: name=grunt-cli global=yes state=present
+- file: name=/etc/nginx/conf.d/default.conf state=absent
+- file: name=/etc/nginx/conf.d/example_ssl.conf state=absent
+- template: src=default.j2 dest=/etc/nginx/conf.d/default.conf owner=root group=root mode=0644
+  notify: reload nginx
+- get_url: url=http://symfony.com/installer dest=/usr/local/bin/symfony
+- file: path=/usr/local/bin/symfony state=file mode=a+x
+- shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin creates=/usr/local/bin/composer
+- shell: mv /usr/local/bin/composer.phar /usr/local/bin/composer creates=/usr/local/bin/composer
+- file: path=/usr/local/bin/composer mode=a+x state=file
+- shell: rm -rf {{ nginx_root_dir }}/.??*
+- shell: composer -n create-project symfony/framework-standard-edition {{ nginx_root_dir }}
+- copy: src=.gitignore dest={{ nginx_root_dir }}
