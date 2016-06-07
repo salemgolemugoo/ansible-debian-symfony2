@@ -8,7 +8,8 @@
   notify: reload nginx
 - get_url: url=http://symfony.com/installer dest=/usr/local/bin/symfony
 - file: path=/usr/local/bin/symfony state=file mode=a+x
-- shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin creates=/usr/local/bin/composer
+- get_url: url=https://getcomposer.org/installer dest=/tmp/installer
+- shell: cat /tmp/installer | php -- --install-dir=/usr/local/bin creates=/usr/local/bin/composer
 - shell: mv /usr/local/bin/composer.phar /usr/local/bin/composer creates=/usr/local/bin/composer
 - file: path=/usr/local/bin/composer mode=a+x state=file
 - file: path={{ nginx_root_dir }}/* state=absent
